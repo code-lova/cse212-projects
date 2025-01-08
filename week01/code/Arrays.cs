@@ -13,7 +13,23 @@ public static class Arrays
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
 
-        return []; // replace this return statement with your own
+        //STEPS
+        //1. Input: A double (starting number) and an int (number of multiples) E.G (7, 5).
+        //2. Create an array of size length to store the multiples.
+        //3. Use a for loop that runs length times.
+        //4. For each iteration:
+            //4.1 Compute the multiple by multiplying the starting number by the current iteration index (starting from 1).
+            //4.2 Store the result in the array at the corresponding index.
+        //5. Then return the filled array
+
+        double[] multiples = new double[length]; // Step 1: Initialize the array to store the multiples
+
+        for (int i = 0; i < length; i++) // Step 2: Populate the array with multiples of the number
+        {   
+            multiples[i] = number * (i + 1); // Compute the multiple and store it in the array
+        }
+       
+        return multiples;  // Step 3: Return the array of multiples
     }
 
     /// <summary>
@@ -29,5 +45,33 @@ public static class Arrays
         // Remember: Using comments in your program, write down your process for solving this problem
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
+
+        //STEP BY STEP OF THE CODE
+        // 1. Handle edge cases (empty list, single element, or where amount = 0).
+        // 2. Calculate the effective rotation amount using modulo operator to handle cases where amount > list size.
+        // 3. Split the list into two parts:
+        //    - The last 'amount' elements.
+        //    - The remaining elements.
+        // 4. Rearrange the list:
+        //    - Move the last 'amount' elements to the front.
+        //    - Append the remaining elements.
+        // 5. Now modify the existing list by clearing it and adding the reordered elements.
+        //Simple...
+
+        
+        if (data == null || data.Count <= 1 || amount == 0) return;  // Step 1: Handle edge cases
+
+        // Step 2: Calculate the effective rotation amount
+        int count = data.Count;
+        amount = amount % count; // Handles cases where amount > count
+
+        // Step 3: Lets Split the list into two parts
+        var rotatedPart = data.GetRange(count - amount, amount); // Last 'amount' elements
+        var remainingPart = data.GetRange(0, count - amount);    // Remaining elements
+
+        // Step 4: Modify the original list
+        data.Clear();
+        data.AddRange(rotatedPart);    // Add the rotated part
+        data.AddRange(remainingPart);  // Add the remaining part
     }
 }
