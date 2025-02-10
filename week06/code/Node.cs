@@ -12,6 +12,9 @@ public class Node
     public void Insert(int value)
     {
         // TODO Start Problem 1
+        if(value == Data){
+            return;
+        }
 
         if (value < Data)
         {
@@ -34,12 +37,30 @@ public class Node
     public bool Contains(int value)
     {
         // TODO Start Problem 2
-        return false;
+        if(value == Data){
+            return true;
+        }
+        if(value < Data){
+            // Search in the left subtree
+            return Left?.Contains(value) ?? false;
+        }
+        else{
+            return Right?.Contains(value) ?? false; // we then Search in the left subtree
+        }
     }
 
     public int GetHeight()
     {
         // TODO Start Problem 4
-        return 0; // Replace this line with the correct return statement(s)
+         // Base case: If the node has no children, height is 1
+        if (Left == null && Right == null)
+            return 1;
+
+        // Recursively get the height of left and right subtrees
+        int leftHeight = Left?.GetHeight() ?? 0;
+        int rightHeight = Right?.GetHeight() ?? 0;
+
+        // The height of the tree is 1 + max(left height, right height)
+        return 1 + Math.Max(leftHeight, rightHeight);
     }
 }
